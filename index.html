@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bear Runner</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="controls">
+            <label for="zoom">Size:</label>
+            <input type="range" id="zoom" min="240" max="480" value="360" step="10">
+            <span id="zoom-value">360px</span>
+        </div>
+        <div id="game-wrapper">
+            <canvas id="game-canvas" width="360" height="200"></canvas>
+        </div>
+        <div class="instructions">
+            Space or Click to Jump / Restart
+        </div>
+    </div>
+    <script type="module" src="src/main.js"></script>
+</body>
+</html>
