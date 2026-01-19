@@ -179,7 +179,7 @@ export class Game {
             this.ctx.stroke();
         }
 
-        this.assets.draw(this.ctx, 'bear', this.bear.x, this.bear.y, this.bear.width, this.bear.height);
+        this.assets.draw(this.ctx, 'bear', this.bear.x, this.bear.y, this.bear.width, this.bear.height, this.bear.isJumping);
 
         for (const obs of this.obstacles) {
             this.assets.draw(this.ctx, obs.key, obs.x, obs.y, obs.width, obs.height);
