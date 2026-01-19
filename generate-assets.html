@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Generate Game Assets</title>
+    <style>
+        body { font-family: monospace; padding: 20px; background: #f0f0f0; }
+        .asset { margin: 20px; padding: 10px; background: white; display: inline-block; }
+        canvas { border: 1px solid #ccc; image-rendering: pixelated; }
+        button { margin: 10px 0; padding: 8px 16px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h2>Game Asset Generator</h2>
+    <p>Click the download buttons to save each asset to your assets/ folder</p>
+
+    <div class="asset">
+        <h3>bear_run.png (64x64)</h3>
+        <canvas id="bear_run" width="64" height="64"></canvas><br>
+        <button onclick="download('bear_run')">Download</button>
+    </div>
+
+    <div class="asset">
+        <h3>bear_jump.png (64x64)</h3>
+        <canvas id="bear_jump" width="64" height="64"></canvas><br>
+        <button onclick="download('bear_jump')">Download</button>
+    </div>
+
+    <div class="asset">
+        <h3>obs_cup.png (34x48)</h3>
+        <canvas id="obs_cup" width="34" height="48"></canvas><br>
+        <button onclick="download('obs_cup')">Download</button>
+    </div>
+
+    <div class="asset">
+        <h3>obs_pizza.png (58x30)</h3>
+        <canvas id="obs_pizza" width="58" height="30"></canvas><br>
+        <button onclick="download('obs_pizza')">Download</button>
+    </div>
+
+    <div class="asset">
+        <h3>obs_bin.png (46x56)</h3>
+        <canvas id="obs_bin" width="46" height="56"></canvas><br>
+        <button onclick="download('obs_bin')">Download</button>
+    </div>
+
+    <script>
+        function drawBearRun(ctx, w, h) {
+            ctx.fillStyle = '#d4a574';
+            ctx.fillRect(0, 0, w, h);
+
+            // Head
+            ctx.fillStyle = '#c99660';
+            ctx.fillRect(20, 8, 24, 24);
+
+            // Ears
+            ctx.fillStyle = '#b8855a';
+            ctx.fillRect(18, 6, 8, 8);
+            ctx.fillRect(34, 6, 8, 8);
+
+            // Eyes
+            ctx.fillStyle = '#2c2416';
+            ctx.fillRect(26, 16, 4, 4);
+            ctx.fillRect(34, 16, 4, 4);
+
+            // Nose
+            ctx.fillStyle = '#3d3020';
+            ctx.fillRect(30, 22, 4, 4);
+
+            // Body
+            ctx.fillStyle = '#d4a574';
+            ctx.fillRect(16, 32, 32, 20);
+
+            // Arms
+            ctx.fillRect(12, 34, 8, 16);
+            ctx.fillRect(44, 34, 8, 16);
+
+            // Legs
+            ctx.fillRect(20, 52, 8, 12);
+            ctx.fillRect(36, 52, 8, 12);
+        }
+
+        function drawBearJump(ctx, w, h) {
+            ctx.fillStyle = '#d4a574';
+            ctx.fillRect(0, 0, w, h);
+
+            // Head
+            ctx.fillStyle = '#c99660';
+            ctx.fillRect(20, 8, 24, 24);
+
+            // Ears
+            ctx.fillStyle = '#b8855a';
+            ctx.fillRect(18, 6, 8, 8);
+            ctx.fillRect(34, 6, 8, 8);
+
+            // Eyes
+            ctx.fillStyle = '#2c2416';
+            ctx.fillRect(26, 16, 4, 4);
+            ctx.fillRect(34, 16, 4, 4);
+
+            // Nose
+            ctx.fillStyle = '#3d3020';
+            ctx.fillRect(30, 22, 4, 4);
+
+            // Body
+            ctx.fillStyle = '#d4a574';
+            ctx.fillRect(16, 32, 32, 20);
+
+            // Arms (raised)
+            ctx.fillRect(8, 28, 8, 16);
+            ctx.fillRect(48, 28, 8, 16);
+
+            // Legs (bent)
+            ctx.fillRect(20, 48, 8, 16);
+            ctx.fillRect(36, 48, 8, 16);
+        }
+
+        function drawCup(ctx, w, h) {
+            ctx.fillStyle = '#f5f3f0';
+            ctx.fillRect(0, 0, w, h);
+
+            // Cup body
+            ctx.fillStyle = '#c9a882';
+            ctx.fillRect(4, 8, 26, 36);
+
+            // Lid
+            ctx.fillStyle = '#8a7a6a';
+            ctx.fillRect(2, 6, 30, 4);
+
+            // Sleeve
+            ctx.fillStyle = '#a89070';
+            ctx.fillRect(4, 20, 26, 12);
+
+            // Highlight
+            ctx.fillStyle = '#dcc0a0';
+            ctx.fillRect(6, 10, 4, 28);
+        }
+
+        function drawPizza(ctx, w, h) {
+            ctx.fillStyle = '#f5f3f0';
+            ctx.fillRect(0, 0, w, h);
+
+            // Crust
+            ctx.fillStyle = '#c9955a';
+            ctx.fillRect(2, 2, 54, 26);
+
+            // Cheese base
+            ctx.fillStyle = '#e8b86d';
+            ctx.fillRect(6, 6, 46, 18);
+
+            // Pepperoni
+            ctx.fillStyle = '#c85050';
+            ctx.fillRect(12, 10, 8, 8);
+            ctx.fillRect(28, 8, 8, 8);
+            ctx.fillRect(42, 12, 8, 8);
+
+            // Olives
+            ctx.fillStyle = '#2c2c2c';
+            ctx.fillRect(20, 14, 6, 6);
+            ctx.fillRect(36, 16, 6, 6);
+        }
+
+        function drawBin(ctx, w, h) {
+            ctx.fillStyle = '#f5f3f0';
+            ctx.fillRect(0, 0, w, h);
+
+            // Bin body
+            ctx.fillStyle = '#8a9ba8';
+            ctx.fillRect(6, 12, 34, 40);
+
+            // Lid
+            ctx.fillStyle = '#7a8b98';
+            ctx.fillRect(4, 8, 38, 6);
+
+            // Handle
+            ctx.fillStyle = '#6a7b88';
+            ctx.fillRect(18, 6, 10, 4);
+
+            // Shadow
+            ctx.fillStyle = '#6a7b88';
+            ctx.fillRect(8, 20, 30, 30);
+
+            // Highlight
+            ctx.fillStyle = '#9aadb8';
+            ctx.fillRect(10, 14, 6, 36);
+        }
+
+        const canvas_bear_run = document.getElementById('bear_run');
+        drawBearRun(canvas_bear_run.getContext('2d'), 64, 64);
+
+        const canvas_bear_jump = document.getElementById('bear_jump');
+        drawBearJump(canvas_bear_jump.getContext('2d'), 64, 64);
+
+        const canvas_cup = document.getElementById('obs_cup');
+        drawCup(canvas_cup.getContext('2d'), 34, 48);
+
+        const canvas_pizza = document.getElementById('obs_pizza');
+        drawPizza(canvas_pizza.getContext('2d'), 58, 30);
+
+        const canvas_bin = document.getElementById('obs_bin');
+        drawBin(canvas_bin.getContext('2d'), 46, 56);
+
+        function download(id) {
+            const canvas = document.getElementById(id);
+            const url = canvas.toDataURL('image/png');
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = id + '.png';
+            a.click();
+        }
+    </script>
+</body>
+</html>

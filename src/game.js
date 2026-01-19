@@ -161,21 +161,25 @@ export class Game {
     }
 
     render() {
-        this.ctx.fillStyle = '#f5f3f0';
-        this.ctx.fillRect(0, 0, this.width, this.height);
+        const bgAsset = this.assets.images['background'];
+        if (bgAsset && bgAsset.loaded && bgAsset.image) {
+            this.ctx.drawImage(bgAsset.image, 0, 0, this.width, this.height);
+        } else {
+            this.ctx.fillStyle = '#f5f3f0';
+            this.ctx.fillRect(0, 0, this.width, this.height);
 
-        this.ctx.fillStyle = '#e8e5df';
-        this.ctx.fillRect(0, this.groundY, this.width, this.height - this.groundY);
+            this.ctx.fillStyle = '#e8e5df';
+            this.ctx.fillRect(0, this.groundY, this.width, this.height - this.groundY);
 
-        this.ctx.strokeStyle = '#d4cfc5';
-        this.ctx.lineWidth = 1;
-        this.ctx.beginPath();
-        this.ctx.moveTo(0, this.groundY);
-        this.ctx.lineTo(this.width, this.groundY);
-        this.ctx.stroke();
+            this.ctx.strokeStyle = '#d4cfc5';
+            this.ctx.lineWidth = 1;
+            this.ctx.beginPath();
+            this.ctx.moveTo(0, this.groundY);
+            this.ctx.lineTo(this.width, this.groundY);
+            this.ctx.stroke();
+        }
 
-        const bearSprite = this.bear.isJumping ? 'bear_jump' : 'bear_run';
-        this.assets.draw(this.ctx, bearSprite, this.bear.x, this.bear.y, this.bear.width, this.bear.height);
+        this.assets.draw(this.ctx, 'bear', this.bear.x, this.bear.y, this.bear.width, this.bear.height);
 
         for (const obs of this.obstacles) {
             this.assets.draw(this.ctx, obs.key, obs.x, obs.y, obs.width, obs.height);

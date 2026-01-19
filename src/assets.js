@@ -3,21 +3,20 @@ export class AssetLoader {
         this.images = {};
         this.loaded = false;
         this.fallbackColors = {
-            bear_run: '#d4a574',
-            bear_jump: '#d4a574',
+            bear: '#d4a574',
             obs_cup: '#c9a882',
             obs_pizza: '#e8b86d',
-            obs_bin: '#8a9ba8'
+            obs_bin: '#8a9ba8',
+            background: '#f5f3f0'
         };
     }
 
     async load() {
         const assets = [
-            { key: 'bear_run', src: 'assets/bear_run.png' },
-            { key: 'bear_jump', src: 'assets/bear_jump.png' },
-            { key: 'obs_cup', src: 'assets/obs_cup.png' },
-            { key: 'obs_pizza', src: 'assets/obs_pizza.png' },
-            { key: 'obs_bin', src: 'assets/obs_bin.png' }
+            { key: 'bear', src: 'assets/bear.gif' },
+            { key: 'obs_cup', src: 'assets/Cup.png' },
+            { key: 'obs_pizza', src: 'assets/Pizza.png' },
+            { key: 'background', src: 'assets/background.png' }
         ];
 
         const promises = assets.map(asset => {
@@ -37,6 +36,8 @@ export class AssetLoader {
 
         await Promise.all(promises);
         this.loaded = true;
+
+        this.images['obs_bin'] = { image: null, loaded: false };
     }
 
     draw(ctx, key, x, y, width, height) {
