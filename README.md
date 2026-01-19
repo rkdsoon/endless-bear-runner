@@ -1,11 +1,11 @@
-# Endless Bear Runner
+# Witch Runner
 
-A simple endless runner game built with Vanilla JS and Canvas API.
+A magical endless runner game built with Vanilla JS and Canvas API.
 
 ## Features
 
 - Endless runner gameplay with increasing difficulty
-- Pastel color theme for work-friendly visuals
+- Night city theme with pixel art graphics
 - Auto-pause when tab loses focus
 - High score saved in localStorage
 - Adjustable canvas size (240px - 480px)
@@ -14,7 +14,7 @@ A simple endless runner game built with Vanilla JS and Canvas API.
 ## How to Play
 
 - Press **Space** or **Click** to jump
-- Avoid obstacles (coffee cups, pizza slices, trash bins)
+- Avoid celestial obstacles (moons and stars)
 - Survive as long as possible to get a high score
 
 ## Development
@@ -30,11 +30,10 @@ This is a static web app with no dependencies:
 │   ├── game.js
 │   └── assets.js
 └── assets/
-    ├── bear_run.png
-    ├── bear_jump.png
-    ├── obs_cup.png
-    ├── obs_pizza.png
-    └── obs_bin.png
+    ├── background.png
+    ├── witch-runner.png
+    ├── moon.png
+    └── star.png
 ```
 
 ## Deployment

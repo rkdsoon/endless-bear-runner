@@ -10,16 +10,16 @@ export class Game {
 
         this.state = 'WAITING';
         this.score = 0;
-        this.highScore = parseInt(localStorage.getItem('bearRunnerHighScore') || '0');
+        this.highScore = parseInt(localStorage.getItem('witchRunnerHighScore') || '0');
         this.frameCount = 0;
         this.startTime = 0;
 
-        this.bear = {
+        this.witch = {
             x: 60,
             y: this.groundY - 64,
             width: 64,
             height: 64,
-            hitbox: { x: 14, y: 12, w: 36, h: 46 },
+            hitbox: { x: 10, y: 10, w: 44, h: 44 },
             velocityY: 0,
             gravity: 0.6,
             jumpPower: -11,
@@ -29,9 +29,8 @@ export class Game {
 
         this.obstacles = [];
         this.obstacleTypes = [
-            { key: 'obs_cup', width: 34, height: 48, hitbox: { x: 6, y: 6, w: 22, h: 38 } },
-            { key: 'obs_pizza', width: 58, height: 30, hitbox: { x: 6, y: 6, w: 46, h: 18 } },
-            { key: 'obs_bin', width: 46, height: 56, hitbox: { x: 8, y: 8, w: 30, h: 44 } }
+            { key: 'moon', width: 50, height: 50, hitbox: { x: 5, y: 5, w: 40, h: 40 } },
+            { key: 'star', width: 45, height: 45, hitbox: { x: 5, y: 5, w: 35, h: 35 } }
         ];
 
         this.gameSpeed = 4;
@@ -46,9 +45,9 @@ export class Game {
         this.frameCount = 0;
         this.startTime = performance.now();
         this.obstacles = [];
-        this.bear.y = this.bear.groundY;
-        this.bear.velocityY = 0;
-        this.bear.isJumping = false;
+        this.witch.y = this.witch.groundY;
+        this.witch.velocityY = 0;
+        this.witch.isJumping = false;
         this.gameSpeed = 4;
         this.spawnTimer = 0;
     }
@@ -72,9 +71,9 @@ export class Game {
             return;
         }
 
-        if (this.state === 'PLAYING' && !this.bear.isJumping) {
-            this.bear.velocityY = this.bear.jumpPower;
-            this.bear.isJumping = true;
+        if (this.state === 'PLAYING' && !this.witch.isJumping) {
+            this.witch.velocityY = this.witch.jumpPower;
+            this.witch.isJumping = true;
         }
     }
 
@@ -86,18 +85,18 @@ export class Game {
 
         if (this.score > this.highScore) {
             this.highScore = this.score;
-            localStorage.setItem('bearRunnerHighScore', this.highScore.toString());
+            localStorage.setItem('witchRunnerHighScore', this.highScore.toString());
         }
 
         this.gameSpeed = 4 + Math.floor(this.score / 100) * 0.5;
 
-        this.bear.velocityY += this.bear.gravity;
-        this.bear.y += this.bear.velocityY;
+        this.witch.velocityY += this.witch.gravity;
+        this.witch.y += this.witch.velocityY;
 
-        if (this.bear.y >= this.bear.groundY) {
-            this.bear.y = this.bear.groundY;
-            this.bear.velocityY = 0;
-            this.bear.isJumping = false;
+        if (this.witch.y >= this.witch.groundY) {
+            this.witch.y = this.witch.groundY;
+            this.witch.velocityY = 0;
+            this.witch.isJumping = false;
         }
 
         this.spawnTimer++;
@@ -132,11 +131,11 @@ export class Game {
     }
 
     checkCollisions() {
-        const bearHitbox = {
-            x: this.bear.x + this.bear.hitbox.x,
-            y: this.bear.y + this.bear.hitbox.y,
-            w: this.bear.hitbox.w,
-            h: this.bear.hitbox.h
+        const witchHitbox = {
+            x: this.witch.x + this.witch.hitbox.x,
+            y: this.witch.y + this.witch.hitbox.y,
+            w: this.witch.hitbox.w,
+            h: this.witch.hitbox.h
         };
 
         for (const obs of this.obstacles) {
@@ -147,10 +146,10 @@ export class Game {
                 h: obs.hitbox.h
             };
 
-            if (bearHitbox.x < obsHitbox.x + obsHitbox.w &&
-                bearHitbox.x + bearHitbox.w > obsHitbox.x &&
-                bearHitbox.y < obsHitbox.y + obsHitbox.h &&
-                bearHitbox.y + bearHitbox.h > obsHitbox.y) {
+            if (witchHitbox.x < obsHitbox.x + obsHitbox.w &&
+                witchHitbox.x + witchHitbox.w > obsHitbox.x &&
+                witchHitbox.y < obsHitbox.y + obsHitbox.h &&
+                witchHitbox.y + witchHitbox.h > obsHitbox.y) {
                 this.gameOver();
             }
         }
@@ -179,7 +178,7 @@ export class Game {
             this.ctx.stroke();
         }
 
-        this.assets.draw(this.ctx, 'bear', this.bear.x, this.bear.y, this.bear.width, this.bear.height, this.bear.isJumping);
+        this.assets.draw(this.ctx, 'witch', this.witch.x, this.witch.y, this.witch.width, this.witch.height);
 
         for (const obs of this.obstacles) {
             this.assets.draw(this.ctx, obs.key, obs.x, obs.y, obs.width, obs.height);
