@@ -29,13 +29,13 @@ export class Game {
 
         this.obstacles = [];
         this.obstacleTypes = [
-            { key: 'moon', width: 40, height: 40, hitbox: { x: 5, y: 5, w: 30, h: 30 } },
-            { key: 'star', width: 35, height: 35, hitbox: { x: 5, y: 5, w: 25, h: 25 } }
+            { key: 'moon', width: 30, height: 30, hitbox: { x: 5, y: 5, w: 20, h: 20 } },
+            { key: 'star', width: 28, height: 28, hitbox: { x: 5, y: 5, w: 18, h: 18 } }
         ];
 
         this.gameSpeed = 3;
         this.spawnTimer = 0;
-        this.spawnInterval = 90;
+        this.spawnInterval = 120;
         this.pauseTime = 0;
     }
 
@@ -106,7 +106,7 @@ export class Game {
         if (this.spawnTimer >= this.spawnInterval && elapsedTime >= 1000) {
             this.spawnObstacle();
             this.spawnTimer = 0;
-            this.spawnInterval = 60 + Math.random() * 40;
+            this.spawnInterval = 90 + Math.random() * 40;
         }
 
         for (let i = this.obstacles.length - 1; i >= 0; i--) {
