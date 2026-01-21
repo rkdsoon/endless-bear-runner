@@ -33,7 +33,7 @@ export class Game {
             { key: 'star', width: 35, height: 35, hitbox: { x: 5, y: 5, w: 25, h: 25 } }
         ];
 
-        this.gameSpeed = 4;
+        this.gameSpeed = 3;
         this.spawnTimer = 0;
         this.spawnInterval = 90;
         this.pauseTime = 0;
@@ -48,7 +48,7 @@ export class Game {
         this.witch.y = this.witch.groundY;
         this.witch.velocityY = 0;
         this.witch.isJumping = false;
-        this.gameSpeed = 4;
+        this.gameSpeed = 3;
         this.spawnTimer = 0;
     }
 
@@ -90,7 +90,7 @@ export class Game {
             localStorage.setItem('witchRunnerHighScore', this.highScore.toString());
         }
 
-        this.gameSpeed = 4 + Math.floor(this.score / 100) * 0.5;
+        this.gameSpeed = 3 + Math.floor(this.score / 100) * 0.5;
 
         this.witch.velocityY += this.witch.gravity;
         this.witch.y += this.witch.velocityY;
