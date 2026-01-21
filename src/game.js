@@ -29,14 +29,14 @@ export class Game {
 
         this.obstacles = [];
         this.obstacleTypes = [
-            { key: 'moon', width: 50, height: 50, hitbox: { x: 5, y: 5, w: 40, h: 40 } },
-            { key: 'star', width: 45, height: 45, hitbox: { x: 5, y: 5, w: 35, h: 35 } }
+            { key: 'moon', width: 40, height: 40, hitbox: { x: 5, y: 5, w: 30, h: 30 } },
+            { key: 'star', width: 35, height: 35, hitbox: { x: 5, y: 5, w: 25, h: 25 } }
         ];
 
         this.gameSpeed = 4;
         this.spawnTimer = 0;
         this.spawnInterval = 90;
-        this.lastFrameTime = performance.now();
+        this.pauseTime = 0;
     }
 
     start() {
@@ -55,13 +55,15 @@ export class Game {
     pause() {
         if (this.state === 'PLAYING') {
             this.state = 'PAUSED';
+            this.pauseTime = performance.now();
         }
     }
 
     resume() {
         if (this.state === 'PAUSED') {
             this.state = 'PLAYING';
-            this.lastFrameTime = performance.now();
+            const pauseDuration = performance.now() - this.pauseTime;
+            this.startTime += pauseDuration;
         }
     }
 
@@ -100,7 +102,8 @@ export class Game {
         }
 
         this.spawnTimer++;
-        if (this.spawnTimer >= this.spawnInterval) {
+        const elapsedTime = performance.now() - this.startTime;
+        if (this.spawnTimer >= this.spawnInterval && elapsedTime >= 1000) {
             this.spawnObstacle();
             this.spawnTimer = 0;
             this.spawnInterval = 60 + Math.random() * 40;
@@ -189,15 +192,35 @@ export class Game {
         this.ctx.textAlign = 'left';
 
         if (this.state === 'WAITING') {
-            this.ctx.fillText('READY', 10, 20);
+            this.ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+            this.ctx.fillRect(0, 0, this.width, this.height);
+
+            this.ctx.fillStyle = '#333';
+            this.ctx.font = '16px monospace';
+            this.ctx.textAlign = 'center';
+            this.ctx.fillText('게임 시작', this.width / 2, this.height / 2);
         } else if (this.state === 'PAUSED') {
+            this.ctx.fillStyle = '#8a837a';
+            this.ctx.textAlign = 'left';
+            this.ctx.font = '11px monospace';
             this.ctx.fillText('PAUSED', 10, 20);
         } else if (this.state === 'GAMEOVER') {
-            this.ctx.fillText('GAME OVER', 10, 20);
+            this.ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+            this.ctx.fillRect(0, 0, this.width, this.height);
+
+            this.ctx.fillStyle = '#333';
+            this.ctx.font = '16px monospace';
+            this.ctx.textAlign = 'center';
+            this.ctx.fillText('다시 시도', this.width / 2, this.height / 2);
         } else {
+            this.ctx.fillStyle = '#8a837a';
+            this.ctx.textAlign = 'left';
+            this.ctx.font = '11px monospace';
             this.ctx.fillText('PLAYING', 10, 20);
         }
 
+        this.ctx.fillStyle = '#8a837a';
+        this.ctx.font = '11px monospace';
         this.ctx.textAlign = 'right';
         this.ctx.fillText(`Score: ${this.score}`, this.width - 10, 20);
         this.ctx.fillText(`High: ${this.highScore}`, this.width - 10, 35);
